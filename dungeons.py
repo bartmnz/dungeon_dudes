@@ -14,10 +14,14 @@ class Place:
         self.monsters = []
         self.hero = hero
         self.treasure = loot[randint(0,3)] + loot2[randint(0,4)]
-        x = randint(0,10)
-        y = x
-        if ( x > 3 ):
-            y = 1 + x % 2
+        x = randint(0,100)
+        y = 0 #28% chance of staying 0
+        if ( not x % 2 ): # 50% chance 
+            y = 1
+        elif ( not x % 3): # 17% chance
+            y = 2
+        elif ( not x % 7): # 5% 
+            y = 3
         x = 0 
         while (x < y):
             self.monsters.append(Monster())
@@ -27,8 +31,8 @@ class Place:
         os.system('clear')
         print ('Entering ' + self.name )
         time.sleep(.75)
-        if ( len(self.monsters) == 0):
-            return
+        # if ( len(self.monsters) == 0):
+        #     return
         monMax = 0
         heroFirst = False
         for monster in self.monsters:
@@ -45,7 +49,9 @@ class Place:
             #     return
         # else:
         #     print ('They see you first FIGHT!!!')
-        while ( not len(self.monsters)):
+        print( str(len(self.monsters)))
+        time.sleep(1)
+        while ( len(self.monsters) == 0):
             result = self.printOptions()
             if (result == '5'):
                 print('No monsters to fight')
@@ -55,6 +61,8 @@ class Place:
     
     def fight(self, heroFirst):
         battleStarted = False
+        if ( not len(self.monsters)):
+            print('No monsters to fight')
         while (self.hero.listHealth() and len(self.monsters)):
             choice = self.printOptions()
             if( choice == '2' and battleStarted == False):
@@ -80,9 +88,9 @@ class Place:
             if (self.monsters[0].rollDice() > self.hero.rollDice()):
                     print('He punches you in the face')
                     self.hero.getHurt()
-                    heroFirst = True
             else:
                 print('He missed')
+            heroFirst = True
             time.sleep(.5)
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
