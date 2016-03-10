@@ -1,7 +1,8 @@
 #!usr/bin/env python3
 from random import randint
 import os
-
+import time
+import sys
 
 class Place:
     def __init__(self, hero):
@@ -25,6 +26,7 @@ class Place:
     def __visitRoom__(self):
         os.system('clear')
         print ('Entering ' + self.name )
+        time.sleep(.75)
         if ( len(self.monsters) == 0):
             return
         monMax = 0
@@ -43,6 +45,12 @@ class Place:
             #     return
         # else:
         #     print ('They see you first FIGHT!!!')
+        while ( not len(self.monsters)):
+            result = self.printOptions()
+            if (result == '5'):
+                print('No monsters to fight')
+            if (result == '2'):
+                return
         self.fight(heroFirst)
     
     def fight(self, heroFirst):
@@ -52,30 +60,36 @@ class Place:
             if( choice == '2' and battleStarted == False):
                 return
             if (choice == '2'):
-                print('You can\'t runa way in the middle of a battle')
+                print('You can\'t run away in the middle of a battle')
             battleStarted = True
             if( heroFirst):
                 if (self.hero.rollDice() >= self.monsters[0].rollDice()):
                     print('You punch him in the face')
                     self.monsters[0].getHurt()
-                
-            if (self.monsters[0].rollDice() > self.hero.rollDice()):
-                    print('He punches you in the face')
-                    self.hero.getHurt()
-                    heroFirst = True
+                else:
+                    print('You missed')
             if ( self.monsters[0].listHealth() == 0):
                 print('You killed the monster')
                 self.monsters.remove(self.monsters[0])
                 x = len(self.monsters)
                 if ( x > 0):
-                    input('There are still ' + str(x) + ' monsters in the room\n')
-                    os.system('clear')
+                    continue
+                    # os.system('clear')
+                else:
+                    break
+            if (self.monsters[0].rollDice() > self.hero.rollDice()):
+                    print('He punches you in the face')
+                    self.hero.getHurt()
+                    heroFirst = True
+            else:
+                print('He missed')
+            time.sleep(.5)
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
             input (' you killed all the monsters and you found ' + self.treasure + '\n')
             
     def printOptions(self):
-        input()
+        # input()
         os.system('clear')
         print ('In ' + self.name )
         num = str(len(self.monsters))
@@ -85,16 +99,17 @@ class Place:
         print('3) List health')
         print('4) Monster\'s health')
         print('5) Attack the monster')
+        print('q for quit')
         value = input()
         if (value == '1'):
             os.system('clear')
             self.hero.listLoot()
-            return self.printOptions()
-        if (value == '3'):
+            input()
+        elif (value == '3'):
             os.system('clear')
             print ('Health left: ' + str(self.hero.listHealth()))
-            return self.printOptions()
-        if (value == '4'):
+            time.sleep(1)
+        elif (value == '4'):
             count = 0
             if (len(self.monsters) ):
                 for monster in self.monsters:
@@ -102,8 +117,15 @@ class Place:
                     count += 1
             else:
                 print('There are no monsters in the room')
-            return self.printOptions()
-        return value
+            input()
+        elif ( value == 'quit' or value == 'q'):
+            sys.exit()
+        elif ( value == '5' or value == '2'):
+            return value
+        else:
+            print('Please input a valid option')
+            time.sleep(.4)
+        return self.printOptions()
                 
     # def getName(self):
     #     return self.name
@@ -139,8 +161,7 @@ class Hero:
     
     def listLoot(self):
         for loot in self.__lootBag:
-            print(loot + ' ')
-            print('\n')
+            print(loot)
     
     def getLoot(self, loot):
         self.__lootBag.append(loot)
@@ -176,7 +197,10 @@ def main():
             if ( ourGuy.listHealth() == 0):
                 print ('OHH snap you died')
                 x = 10
-        again = input('play again? yes : no')
+        os.system('clear')
+        print('You have reached the end of the dungeon!! You found:')
+        ourGuy.listLoot()
+        again = input('play again? yes : no\n')
         if (again == 'no' or again == 'n'):
             play = False
         else:
