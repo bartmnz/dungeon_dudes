@@ -24,10 +24,8 @@ class Place:
     
     def __visitRoom__(self):
         os.system('clear')
-        print ('Entering ' + self.name + '\n')
-        num = str(len(self.monsters))
-        print ('There are ' + num + ' monsters in the room')
-        if ( num == 0):
+        print ('Entering ' + self.name )
+        if ( len(self.monsters) == 0):
             return
         monMax = 0
         heroFirst = False
@@ -36,29 +34,37 @@ class Place:
             if (roll > monMax):
                 monMax = roll
         if (randint(1,6) > monMax):
-            fight = input('They don\'t see you yet. Do you stay and fight? yes : no\n')
-            if (fight == 'yes' or fight == 'y'):
-                heroFirst = True
-            else:
-                os.system('clear')
-                print('Coward\n')
-                return
-        else:
-            print ('They see you first FIGHT!!!\n')
+            # fight = input('They don\'t see you yet. Do you stay and fight? yes : no\n')
+            # if (fight == 'yes' or fight == 'y'):
+            heroFirst = True
+            # else:
+            #     os.system('clear')
+            #     print('Coward')
+            #     return
+        # else:
+        #     print ('They see you first FIGHT!!!')
         self.fight(heroFirst)
     
     def fight(self, heroFirst):
+        battleStarted = False
         while (self.hero.listHealth() and len(self.monsters)):
+            choice = self.printOptions()
+            if( choice == '2' and battleStarted == False):
+                return
+            if (choice == '2'):
+                print('You can\'t runa way in the middle of a battle')
+            battleStarted = True
             if( heroFirst):
                 if (self.hero.rollDice() >= self.monsters[0].rollDice()):
-                    print('You punch him in the face\n')
+                    print('You punch him in the face')
                     self.monsters[0].getHurt()
+                
             if (self.monsters[0].rollDice() > self.hero.rollDice()):
-                    print('He punches you in the face\n')
+                    print('He punches you in the face')
                     self.hero.getHurt()
                     heroFirst = True
             if ( self.monsters[0].listHealth() == 0):
-                print('You killed the monster\n')
+                print('You killed the monster')
                 self.monsters.remove(self.monsters[0])
                 x = len(self.monsters)
                 if ( x > 0):
@@ -133,7 +139,8 @@ class Hero:
     
     def listLoot(self):
         for loot in self.__lootBag:
-            print(loot)
+            print(loot + ' ')
+            print('\n')
     
     def getLoot(self, loot):
         self.__lootBag.append(loot)
@@ -155,7 +162,7 @@ class Hero:
         
 
 def main():
-    print('Let\'s play a little game!\n')
+    print('Let\'s play a little game!')
     x = 0
     
     play = True
@@ -167,9 +174,9 @@ def main():
             room.__visitRoom__() ## remove underscores
             x += 1
             if ( ourGuy.listHealth() == 0):
-                print ('OHH snap you died\n')
+                print ('OHH snap you died')
                 x = 10
-        again = input('play again? yes : no\n')
+        again = input('play again? yes : no')
         if (again == 'no' or again == 'n'):
             play = False
         else:
