@@ -68,6 +68,37 @@ class Place:
             self.hero.getLoot(self.treasure)
             input (' you killed all the monsters and you found ' + self.treasure + '\n')
             
+    def printOptions(self):
+        input()
+        os.system('clear')
+        print ('In ' + self.name )
+        num = str(len(self.monsters))
+        print ('There are ' + num + ' monsters in the room')
+        print('1) List items in loot bag')
+        print('2) Move to next location')
+        print('3) List health')
+        print('4) Monster\'s health')
+        print('5) Attack the monster')
+        value = input()
+        if (value == '1'):
+            os.system('clear')
+            self.hero.listLoot()
+            return self.printOptions()
+        if (value == '3'):
+            os.system('clear')
+            print ('Health left: ' + str(self.hero.listHealth()))
+            return self.printOptions()
+        if (value == '4'):
+            count = 0
+            if (len(self.monsters) ):
+                for monster in self.monsters:
+                    print('Monster ' +str(count) + ' health: ' + str(monster.listHealth()))
+                    count += 1
+            else:
+                print('There are no monsters in the room')
+            return self.printOptions()
+        return value
+                
     # def getName(self):
     #     return self.name
 
