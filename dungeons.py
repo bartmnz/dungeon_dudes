@@ -1,5 +1,21 @@
 from random import randint
 
+def main():
+    print('Let\'s play a little game!')
+    x = 0
+    ourGuy = Hero()
+    play = True
+    while (play):
+        while ( x < 10 ):
+            room = Place(ourGuy)
+            ## print( room.getName())
+            room.__visitRoom__() ## remove underscores
+            x += 1
+        again = input('play again? yes : no')
+        if (again == 'no' or again == 'n'):
+            play = False
+    
+
 class Place:
     def __init__(self, hero):
         nouns = ['desert', 'swamp', 'glade', 'sea', 'forrest', 'lair', 'field', 'pit']
