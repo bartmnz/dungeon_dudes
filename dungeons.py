@@ -8,7 +8,7 @@ def main():
     while (play):
         while ( x < 10 ):
             room = Place(ourGuy)
-            ## print( room.getName())
+            print( room.getName())
             room.__visitRoom__() ## remove underscores
             x += 1
         again = input('play again? yes : no')
@@ -59,6 +59,9 @@ class Place:
                 self.monsters.remove(self.monsters[0])
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
+            
+    def getName(self):
+        return self.name
 
 
 
