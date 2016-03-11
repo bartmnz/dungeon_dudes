@@ -45,16 +45,7 @@ class Place:
             if (roll > monMax):
                 monMax = roll
         if (randint(1,6) > monMax):
-            # fight = input('They don\'t see you yet. Do you stay and fight? yes : no\n')
-            # if (fight == 'yes' or fight == 'y'):
             heroFirst = True
-            # else:
-            #     os.system('clear')
-            #     print('Coward')
-            #     return
-        # else:
-        #     print ('They see you first FIGHT!!!')
-        # print( str(len(self.monsters)))
         time.sleep(1)
         while ( len(self.monsters) == 0):
             result = self.printOptions()
@@ -108,7 +99,6 @@ class Place:
             go = self.printOptions()
             
     def printOptions(self):
-        # input()
         os.system('clear')
         print ('In ' + self.name )
         num = str(len(self.monsters))
@@ -151,10 +141,6 @@ class Place:
             print('Please input a valid option')
             time.sleep(.4)
         return self.printOptions()
-                
-    # def getName(self):
-    #     return self.name
-
 
 
 class Monster:
