@@ -16,11 +16,11 @@ class Place:
         self.hero = hero
         self.treasure = loot[randint(0,3)] + loot2[randint(0,4)]
         x = randint(0,100)
-        y = 0 #28% chance of staying 0
+        y = 2 #28% chance of staying 2
         if ( not x % 2 ): # 50% chance 
             y = 1
         elif ( not x % 3): # 17% chance
-            y = 2
+            y = 0
         elif ( not x % 7): # 5% 
             y = 3
         self.hasMon = y
