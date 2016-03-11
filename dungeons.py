@@ -38,7 +38,7 @@ class Place:
         time.sleep(.75)
         monMax = 0
         heroFirst = False
-        for monster in self.monsters:
+        for roll in self.monsters:
             roll = randint(1,6)
             if (roll > monMax):
                 monMax = roll
