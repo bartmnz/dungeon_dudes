@@ -53,9 +53,9 @@ class Place:
                 print('No monsters to fight')
             if (result == '2'):
                 return
-        self.fight(heroFirst)
+        self.__fight(heroFirst)
     
-    def fight(self, heroFirst):
+    def __fight(self, heroFirst):
         battleStarted = False
         if ( not len(self.monsters)):
             print('No monsters to fight')
