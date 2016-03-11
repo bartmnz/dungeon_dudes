@@ -5,8 +5,20 @@ import os
 import time
 import sys
 
+
+
 class Place:
     def __init__(self, hero, *args):
+        """Create an instance of Place with a random name, and number of monsters
+            and random treasure
+        
+        Args:
+            hero: a hero class object to store
+            *args: if present will set the place to 'hell'
+        Returns:
+            No return value
+        
+        """
         nouns = ['desert', 'swamp', 'glade', 'sea', 'forrest', 'lair', 'field', 'pit']
         adjitives = ['arcane ', 'southern ', 'boistrous ', 'lovely ', 'last ' ]
         loot = ['a pointy ', 'a brilliant ', 'a magical ', 'Thor\'s ']
@@ -33,6 +45,14 @@ class Place:
             x += 1
     
     def visitRoom(self):
+        """ Prompts the user for direction about what they would like to do
+            
+            Args: 
+                None
+            Return:
+                None
+        
+        """
         os.system('clear')
         print ('Entering ' + self.name )
         time.sleep(.75)
@@ -54,6 +74,14 @@ class Place:
         self.__fight(heroFirst)
     
     def __fight(self, heroFirst):
+        """ Initiates a turn based battle between the hero and the monsters in a room
+            Once the battle is started it is to the death.
+            
+            Args: 
+                heroFirst: boolean describing if the hero will attack first.
+            Returns:
+                None
+        """
         battleStarted = False
         if ( not len(self.monsters)):
             print('No monsters to fight')
@@ -97,6 +125,15 @@ class Place:
             go = self.printOptions()
             
     def printOptions(self):
+        """
+        Outputs the options for the place and captures the user's choice
+        
+        Args:
+            None
+        Return:
+            either 2 or 5 depending on the user's choice
+        
+        """
         os.system('clear')
         print ('In ' + self.name )
         num = str(len(self.monsters))
@@ -131,6 +168,7 @@ class Place:
             return value
         elif ( value == '5' ):
             if (self.hasMon and not len(self.monsters)):
+                # Thanks for the idea Follensbee
                 print('He\'s dead Jim')
                 time.sleep(.75)
                 return self.printOptions()
