@@ -169,6 +169,7 @@ class Hero:
         self.__hitsLeft = 10
         self.__potion = True
         self.__lootBag = []
+        self.__hasFought = False
     
     def listLoot(self):
         for loot in self.__lootBag:
@@ -182,6 +183,12 @@ class Hero:
     
     def getHurt(self):
         self.__hitsLeft -= 1
+        
+    def notCoward(self):
+        self.__hasFought = True
+    
+    def trialByCombat(self):
+        return not self.__hasFought
     
     def rollDice(self):
         max = 0
