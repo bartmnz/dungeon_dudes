@@ -66,6 +66,7 @@ class Place:
             if (choice == '2'):
                 print('You can\'t run away in the middle of a battle')
             battleStarted = True
+            self.hero.notCoward()
             if( heroFirst):
                 if (self.hero.rollDice() >= self.monsters[0].rollDice()):
                     print('You punch him in the face')
@@ -219,6 +220,16 @@ def main():
                 time.sleep(1)
                 x = 10
         os.system('clear')
+        if ( survived and ourGuy.trialByCombat()):
+            room = Place(ourGuy, 'hell')
+            while( ourGuy.trialByCombat()):
+                room.visitRoom()
+            if ( ourGuy.listHealth() == 0):
+                print ('Next time fight!!!')
+                survived = False
+                time.sleep(1)
+            else:
+                print ('Holy crap how did you survive???')
         if ( survived):
             print('You have reached the end of the dungeon!! You found:')
             ourGuy.listLoot()
