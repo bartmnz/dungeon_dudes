@@ -22,6 +22,7 @@ class Place:
             y = 2
         elif ( not x % 7): # 5% 
             y = 3
+        self.hasMon = y
         x = 0 
         while (x < y):
             self.monsters.append(Monster())
@@ -133,7 +134,13 @@ class Place:
             input()
         elif ( value == 'quit' or value == 'q'):
             sys.exit()
-        elif ( value == '5' or value == '2'):
+        elif ( value == '2'):
+            return value
+        elif ( value == '5' ):
+            if (self.hasMon and not len(self.monsters)):
+                print('He\'s dead Jim')
+                time.sleep(.75)
+                self.printOptions()
             return value
         else:
             print('Please input a valid option')
