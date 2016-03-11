@@ -244,7 +244,7 @@ def main():
     while (play):
         ourGuy = Hero()
         survived = True
-        while ( x < 1 ):
+        while ( x < 10 ):
             room = Place(ourGuy)
             room.visitRoom() ## remove underscores
             x += 1
