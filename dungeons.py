@@ -6,7 +6,7 @@ import time
 import sys
 
 class Place:
-    def __init__(self, hero):
+    def __init__(self, hero, *args):
         nouns = ['desert', 'swamp', 'glade', 'sea', 'forrest', 'lair', 'field', 'pit']
         adjitives = ['arcane ', 'southern ', 'boistrous ', 'lovely ', 'last ' ]
         loot = ['a pointy ', 'a brilliant ', 'a magical ', 'Thor\'s ']
@@ -23,6 +23,9 @@ class Place:
             y = 0
         elif ( not x % 7): # 5% 
             y = 3
+        if (len(args)):
+            self.name = "Special place in Hell for cowards"
+            y = 10
         self.hasMon = y
         x = 0 
         while (x < y):
