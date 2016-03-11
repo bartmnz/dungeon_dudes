@@ -11,10 +11,10 @@ class Place:
         adjitives = ['arcane ', 'southern ', 'boistrous ', 'lovely ', 'last ' ]
         loot = ['a pointy ', 'a brilliant ', 'a magical ', 'Thor\'s ']
         loot2 = ['stick', 'poo', 'diamond', 'cheese grater', 'zombified head']
-        self.name = 'The ' + adjitives[randint(0,4)] + nouns[randint(0,6)]
+        self.name = 'The ' + random.choice(adjitives) + random.choice(nouns)
         self.monsters = []
         self.hero = hero
-        self.treasure = loot[randint(0,3)] + loot2[randint(0,4)]
+        self.treasure = random.choice(loot) + random.choice(loot2)
         x = randint(0,100)
         y = 2 #28% chance of staying 2
         if ( not x % 2 ): # 50% chance 
