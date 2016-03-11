@@ -98,6 +98,8 @@ class Place:
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
             input (' You killed all the monsters and you found ' + self.treasure + '\n')
+        if ( self.hero.listHealth() == 0 ):
+            return
         go = '1'
         while ( not go == '2'):
             go = self.printOptions()
@@ -210,6 +212,7 @@ def main():
     play = True
     while (play):
         ourGuy = Hero()
+        survived = True
         while ( x < 10 ):
             room = Place(ourGuy)
             # print( room.getName())
@@ -217,10 +220,13 @@ def main():
             x += 1
             if ( ourGuy.listHealth() == 0):
                 print ('OHH snap you died')
+                survived = False
+                time.sleep(1)
                 x = 10
         os.system('clear')
-        print('You have reached the end of the dungeon!! You found:')
-        ourGuy.listLoot()
+        if ( survived):
+            print('You have reached the end of the dungeon!! You found:')
+            ourGuy.listLoot()
         again = input('play again? yes : no\n')
         if (again == 'no' or again == 'n'):
             play = False
