@@ -32,7 +32,7 @@ class Place:
             self.monsters.append(Monster())
             x += 1
     
-    def __visitRoom__(self):
+    def visitRoom(self):
         os.system('clear')
         print ('Entering ' + self.name )
         time.sleep(.75)
@@ -216,10 +216,9 @@ def main():
     while (play):
         ourGuy = Hero()
         survived = True
-        while ( x < 10 ):
+        while ( x < 1 ):
             room = Place(ourGuy)
-            # print( room.getName())
-            room.__visitRoom__() ## remove underscores
+            room.visitRoom() ## remove underscores
             x += 1
             if ( ourGuy.listHealth() == 0):
                 print ('OHH snap you died')
