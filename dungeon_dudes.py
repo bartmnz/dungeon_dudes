@@ -37,13 +37,15 @@ class Place:
             y = 3
         if (len(args)):
             self.name = "Special place in Hell for cowards"
-            y = 10
+            y = 4
         self.hasMon = y
         x = 0 
         while (x < y):
             self.monsters.append(Monster())
             x += 1
-    
+        if (len(args)):
+            self.monsters[3].makeBoss()
+            
     def visitRoom(self):
         """ Prompts the user for direction about what they would like to do
             
@@ -190,6 +192,10 @@ class Monster:
     def getHurt(self):
         self.hitsLeft -= 1
     
+    def makeBoss(self):
+        self.numDice = 4
+        self.hitsLeft = 10
+        
     def rollDice(self):
         max = 0
         for x in range(0,self.numDice):
@@ -259,6 +265,7 @@ def main():
             while( ourGuy.trialByCombat()):
                 room.visitRoom()
             if ( ourGuy.listHealth() == 0):
+                print ('Suprise you died!!')
                 print ('Next time fight!!!')
                 survived = False
                 time.sleep(1)
