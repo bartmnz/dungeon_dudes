@@ -49,7 +49,7 @@ class Place:
             #     return
         # else:
         #     print ('They see you first FIGHT!!!')
-        print( str(len(self.monsters)))
+        # print( str(len(self.monsters)))
         time.sleep(1)
         while ( len(self.monsters) == 0):
             result = self.printOptions()
@@ -80,6 +80,7 @@ class Place:
                 print('You killed the monster')
                 self.monsters.remove(self.monsters[0])
                 x = len(self.monsters)
+                time.sleep(.5)
                 if ( x > 0):
                     continue
                     # os.system('clear')
@@ -94,7 +95,11 @@ class Place:
             time.sleep(.5)
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
-            input (' you killed all the monsters and you found ' + self.treasure + '\n')
+            input (' You killed all the monsters and you found ' + self.treasure + '\n')
+        time.sleep(1)
+        go = '1'
+        while ( not go == '2'):
+            go = self.printOptions()
             
     def printOptions(self):
         # input()
