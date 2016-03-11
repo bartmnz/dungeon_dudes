@@ -36,8 +36,6 @@ class Place:
         os.system('clear')
         print ('Entering ' + self.name )
         time.sleep(.75)
-        # if ( len(self.monsters) == 0):
-        #     return
         monMax = 0
         heroFirst = False
         for monster in self.monsters:
@@ -80,7 +78,6 @@ class Place:
                 time.sleep(.9)
                 if ( x > 0):
                     continue
-                    # os.system('clear')
                 else:
                     break
             if (self.monsters[0].rollDice() > self.hero.rollDice()):
@@ -166,7 +163,6 @@ class Monster:
 
 class Hero:
     def __init__(self):
-        ## get name
         self.__hitsLeft = 10
         self.__potion = True
         self.__lootBag = []
