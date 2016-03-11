@@ -1,5 +1,6 @@
 #!usr/bin/env python3
-from random import randint
+from random import *
+import random
 import os
 import time
 import sys
@@ -195,14 +196,15 @@ class Hero:
     def rollDice(self):
         max = 0
         for x in range(0,3):
-            y = randint(1,6)
-            if( y > max):
-                max = y
+            x = randint(1,6)
+            if( x > max):
+                max = x
         return max
         
         
 
 def main():
+    random.seed(time.time())
     print('Let\'s play a little game!')
     x = 0
     
