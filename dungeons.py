@@ -82,7 +82,7 @@ class Place:
                 print('You killed the monster')
                 self.monsters.remove(self.monsters[0])
                 x = len(self.monsters)
-                time.sleep(.5)
+                time.sleep(.9)
                 if ( x > 0):
                     continue
                     # os.system('clear')
@@ -94,7 +94,7 @@ class Place:
             else:
                 print('He missed')
             heroFirst = True
-            time.sleep(.5)
+            time.sleep(.9)
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
             input (' You killed all the monsters and you found ' + self.treasure + '\n')
