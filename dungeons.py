@@ -157,9 +157,9 @@ class Monster:
     def rollDice(self):
         max = 0
         for x in range(0,self.numDice):
-            y = randint(1,6)
-            if( y > max):
-                max = y
+            x = randint(1,6)
+            if( x > max):
+                max = x
         return max
         
 
