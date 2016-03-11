@@ -98,7 +98,6 @@ class Place:
         if (self.hero.listHealth()):
             self.hero.getLoot(self.treasure)
             input (' You killed all the monsters and you found ' + self.treasure + '\n')
-        time.sleep(1)
         go = '1'
         while ( not go == '2'):
             go = self.printOptions()
