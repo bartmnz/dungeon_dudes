@@ -141,7 +141,7 @@ class Place:
             if (self.hasMon and not len(self.monsters)):
                 print('He\'s dead Jim')
                 time.sleep(.75)
-                self.printOptions()
+                return self.printOptions()
             return value
         else:
             print('Please input a valid option')
